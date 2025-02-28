@@ -108,21 +108,21 @@ The output path should be a folder and the other paths are paths to files. For e
 
 After execution, there will be two files generated in the output path. One is 
 
-record.txt 
+#### record.txt 
 
-and the other 
+and the other is
 
-is result.txt.
+#### result.txt.
 
 In the result file, each query start with "query : [query number]". In the following,  we list the indexes of the edges upon whose insertion there are incremental matches generated, and the number of incremental matches.
 
 In the record file, we record the excecution result of each query in the following form:
 
-query [query number]
+#### query [query number]
 
-[offline index building time] [Whether the query is solved] [total count of match results] [processing time]  [average intermediate result in the matching process induced by each update]
+#### [offline index building time] [Whether the query is solved] [total count of match results] [processing time]  [average intermediate result in the matching process induced by each update]
 
-[total number vertex candidates in the index] [total number edge candidates in the index] [total memory usage of the index]
+#### [total number vertex candidates in the index] [total number edge candidates in the index] [total memory usage of the index]
 
 Note that for unsolved queries the total count of match results may be different for different algorithms. Because they have different processing speed and will find different number of matches in the time limit.
 
