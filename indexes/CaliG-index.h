@@ -155,7 +155,7 @@ public:
 
 	void construct_index()
 	{
-		cout << "constructing index" << endl;
+	//	cout << "constructing index" << endl;
 		for (int i = 0; i < qg->g.size(); i++)
 		{
 			unsigned int u = i;
@@ -188,7 +188,7 @@ public:
 				}
 			}
 		}
-		cout << "initialization finished" << endl;
+	//	cout << "initialization finished" << endl;
 
 		for (int i = 0; i < qg->g.size(); i++)
 		{
@@ -208,7 +208,7 @@ public:
 				}
 			}
 		}
-		cout << "construct finished" << endl;
+	//	cout << "construct finished" << endl;
 	}
 
 	void delete_edge(unsigned int src, unsigned int src_label, unsigned int dst, unsigned int dst_label, unsigned int edge_label)

@@ -39,11 +39,14 @@ int main(int argc, char* argv[])
 {
 	string initial_path = argv[1];
 	string update_path = argv[2];
-	string query_path = argv[2];
+	string query_path = argv[3];
+	string output_path = argv[4];
 
-	string initial_path =  data_path + "/initial_data.txt";
-	string update_path = data_path + "/update_data.txt";
+
+/*	string initial_path =  "D://data//initial-lkml.txt";
+	string update_path = "D://data//updated-lkml.txt";
 	string query_path = "D://data//sparse-query-lkml.txt";
+	string output_path = "./NSP-";*/
 
 	bool record_match = false; // this parameter records if we need to report all match results find in each update. If it is false, we will only report the result count. 
 	//Otherwise we will store the these results in a table. Note that report the result will slow down the algortihm and greatly narrow the gap between different algorithms, as the cost of reporting results may
@@ -56,26 +59,21 @@ int main(int argc, char* argv[])
 
 	// here we assume that the number of vertices are known and ids are consecutive inegers start from 0. If they are not, class data_graph
 	// will transform them into so.
+	
+	string outpath1 = output_path + "result.txt";
+	string outpath2 = output_path + "record.txt";
 
 	
-	ofstream fout("output/TF-Plain-result.txt");
-	ofstream frec("output/TF-Plain-record.txt");
+	ofstream fout(outpath1.c_str());
+	ofstream frec(outpath2.c_str());
+	
 	query_graph* qg = new query_graph;
 	unsigned int query_cursor = 0;
-	unsigned int target_query = 0;
+	unsigned int target_query = 2;
 	while (read_query_graph(qg, fquery))
 	{
-		qg->print_graph();
-		if (query_cursor != target_query)
-		{
-		//	break;
-			query_cursor++;
-			continue;
-		}
-			if (query_cursor > target_query)
-		{
+		if (query_cursor > target_query)
 			break;
-		}
 		cout << "processing query NO" << query_cursor << endl; 
 		fout << "query " << query_cursor << endl;
 		frec << "query " << query_cursor << endl;
@@ -83,7 +81,6 @@ int main(int argc, char* argv[])
 
 		unsigned int vertice_number;
 		fdata >> vertice_number;
-		cout << vertice_number << endl;
 
 		unsigned int src, src_label, dst, dst_label, edge_label;
 		data_graph* g = new data_graph(vertice_number);
@@ -96,12 +93,12 @@ int main(int argc, char* argv[])
 		}
 
 		cout << "load initial data finished " << endl;
-		solution* su = new solution(g, qg, use_global_index, use_edge_view);
+		solution* su = new solution(g, qg, enable_global_index, enable_edge_view);
 		double initialize_time = su->initialization();
 		cout << "initialization time " << initialize_time << endl;
-		if (use_global_index) {
+		if (enable_global_index) {
 			pair<unsigned int, unsigned int> p = su->idx->get_size();
-			cout << p.first << ' ' << p.second << ' ' << su->idx->memory_compute() << endl;
+			cout <<"The candidate cnt, candidate edge cnt, and memory usage of the initial index are "<< p.first << ' ' << p.second << ' ' << su->idx->memory_compute() << endl;
 		}
 		frec << initialize_time << ' ';
 		
@@ -110,7 +107,7 @@ int main(int argc, char* argv[])
 		unsigned int total_match = 0;
 
 		cnt = 0;
-		unsigned int target = 2000;
+
 		start_clock = clock();
 		inter_result =0;
 		filtered_edge = 0;
@@ -139,9 +136,9 @@ int main(int argc, char* argv[])
 		}
 		clock_t current = clock();
 		double time_passd = (double)(current - start_clock) / CLOCKS_PER_SEC;
-		frec << solved << ' ' << ' '<<total_match<<' '<<time_passd <<((double)inter_result/(cnt- label_filtered))<<endl;
+		frec << solved << ' ' << ' '<<total_match<<' '<<time_passd <<' '<<((double)inter_result/(cnt- label_filtered))<<endl;
 		
-		if(use_global_index){
+		if(enable_global_index){
 		pair<unsigned int, unsigned int> p = su->idx->get_size();
 		frec <<p.first<<' '<<p.second<<' '<<su->idx->memory_compute()<<endl;
 		}
@@ -162,7 +159,5 @@ int main(int argc, char* argv[])
 		delete g;
 		delete su;
 	}
-
-
 
 }

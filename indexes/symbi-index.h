@@ -840,7 +840,7 @@ public:
 		for (int i = 0; i < qg->g.size(); i++)
 		{
 			idx->get_candidates(i, tmp_vec);
-			cout << "node " << i << " " << tmp_vec.size() << endl;
+		//	cout << "node " << i << " " << tmp_vec.size() << endl;
 			vertex_sum += tmp_vec.size();
 			tmp_vec.clear();
 		}
