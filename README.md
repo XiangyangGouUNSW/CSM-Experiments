@@ -149,9 +149,9 @@ It can be complied with
 Then executed with 
 #### result-process [path to the record file of alg1]  [path to the record file of alg2]
 
-This program will find the queries where at least one of the algrorithms have solved, and compute the improvement of alg2 against alg1 in this query. Them improvement is computed as 
+This program will find the queries where at least one of the algrorithms have solved, and compute the improvement of alg1 against alg2 in this query. Them improvement is computed as 
 
-####  1 - (prcossing time of alg2) / (prcossing time of alg1). 
+####  1 - (prcossing time of alg1) / (prcossing time of alg2). 
 
 
 
