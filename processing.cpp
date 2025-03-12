@@ -69,7 +69,7 @@ int main(int argc, char* argv[])
 	
 	query_graph* qg = new query_graph;
 	unsigned int query_cursor = 0;
-	unsigned int target_query = 2;
+	unsigned int target_query = 50;
 	while (read_query_graph(qg, fquery))
 	{
 		if (query_cursor > target_query)
