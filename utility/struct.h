@@ -264,10 +264,12 @@ public:
 
 	void set_candidate(unsigned int id, unsigned int candidate)
 	{
-		if(id<candidate_map.size())
+		if(candidate<candidate_map.size())
 			candidate_map[candidate] = (candidate_map[candidate] | (1 << id));
 		else
 		{
+			for(int i=candidate_map.size();i<candidate;i++)
+				candidate_map.push_back(0);
 			v_bitmap val = (1 << id);
 			candidate_map.push_back(val);
 		}
@@ -572,7 +574,7 @@ public:
 		if (cand_map.size() < target_u)
 			return false;
 		//else if (HK() < target_u)
-		else if (!brutal_match_check()) //here we tried both Hopcroft¨CKarp algorithm and a brutal search algorithm to determine if there is an injective match. The comparison result shows a draw.  
+		else if (!brutal_match_check()) //here we tried both HopcroftÂ¨CKarp algorithm and a brutal search algorithm to determine if there is an injective match. The comparison result shows a draw.  
 			//I checked the open-source code a CaliG, it uses brutal search, thus we also adopt it.
 			return false;
 		else
