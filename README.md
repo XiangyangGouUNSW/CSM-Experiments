@@ -8,7 +8,9 @@ To compile the code, users need c++ version 11 or higher.
 
 The datasets and queries that we use in our experiments can be found at https://unsw-my.sharepoint.com/:u:/g/personal/z3544923_ad_unsw_edu_au/EQVwnHa9OONGgy6UqW1we0QB73QF0wi_nIqzdKKcA_fujQ?e=aw9uSb .
 
-The file of initial graph starts with the total vertex count, as we need this count to allocate vertex tables in the graph storage.
+The file of initial graph starts with the total vertex count, as we need this count to allocate vertex tables in the graph storage. 
+
+# Note that we assume that vertex IDs in the initial graph and update stream are consecutive integers that are no larger than the total vertex count n, namely 0~n-1.
 
 Then each line describes an edge, with the form
 
